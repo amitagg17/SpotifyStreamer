@@ -14,7 +14,7 @@ import java.net.URL;
  */
 public class NetworkingHelper {
 
-    public static String sendRequest(String baseUrl) {
+    public static String sendRequest(String requestUrl) {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -25,7 +25,7 @@ public class NetworkingHelper {
             // Construct the URL for the OpenWeatherMap query
             // Possible parameters are avaiable at OWM's forecast API page, at
             // http://openweathermap.org/API#forecast
-            URL url = new URL(baseUrl);
+            URL url = new URL(requestUrl);
 
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();

@@ -1,5 +1,7 @@
 package com.amit.spotifystreamer;
 
+import android.net.Uri;
+
 import java.util.HashMap;
 
 /**
@@ -24,19 +26,20 @@ public class SpotifyStreamerConstants {
 
     static {
         moviePosterSizeMap.put(MoviePosterSize.ORIGINAL, "original");
-        moviePosterSizeMap.put(MoviePosterSize.W92, "W92");
-        moviePosterSizeMap.put(MoviePosterSize.W154, "W154");
-        moviePosterSizeMap.put(MoviePosterSize.W185, "W185");
-        moviePosterSizeMap.put(MoviePosterSize.W342, "W342");
-        moviePosterSizeMap.put(MoviePosterSize.W500, "W500");
-        moviePosterSizeMap.put(MoviePosterSize.W780, "W780");
+        moviePosterSizeMap.put(MoviePosterSize.W92, "w92");
+        moviePosterSizeMap.put(MoviePosterSize.W154, "w154");
+        moviePosterSizeMap.put(MoviePosterSize.W185, "w185");
+        moviePosterSizeMap.put(MoviePosterSize.W342, "w342");
+        moviePosterSizeMap.put(MoviePosterSize.W500, "w500");
+        moviePosterSizeMap.put(MoviePosterSize.W780, "w780");
 
     }
 
     private static final String MOVIE_POSTER_DOWNLOAD_BASE_URL = "http://image.tmdb.org/t/p";
-
-
-    // "w92", "w154", "w185", "w342", "w500", "w780", or "original"
+    private static final String MOVIE_END_POINT_URL = "http://api.themoviedb.org/3/discover/movie";
+    private static final String MOVIE_API_FILTER_PARAM_KEY = "sort_by";
+    private static final String MOVIE_API_POPULAR_MOVIE_FILER = "popularity.desc";
+    private static final String MOVIE_API_KEY = "api_key";
 
     public static String getMoviePosterDownloadBaseUrl() {
         return MOVIE_POSTER_DOWNLOAD_BASE_URL;
@@ -44,6 +47,16 @@ public class SpotifyStreamerConstants {
 
     public static String getMoviePosterDefaultSizeUrl(String posterRelativeUrl) {
         return getMoviePosterUrl(posterRelativeUrl, MoviePosterSize.W185);
+    }
+
+    public static String getPopularMovieUrl() {
+
+        Uri builtUri = Uri.parse(MOVIE_END_POINT_URL).buildUpon()
+                .appendQueryParameter(MOVIE_API_FILTER_PARAM_KEY, MOVIE_API_POPULAR_MOVIE_FILER)
+                .appendQueryParameter(MOVIE_API_KEY, API_KEY)
+                .build();
+        return builtUri.toString();
+
     }
 
     public static String getMoviePosterUrl(String posterRelativeUrl, MoviePosterSize size) {
