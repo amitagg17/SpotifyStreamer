@@ -1,5 +1,6 @@
 package com.amit.spotifystreamer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,13 +24,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
 
     @Override
     public void onMovieSelected(Movie movie) {
-        // Create new fragment and transaction
-        Fragment newFragment = MovieDetailFragment.newInstance(movie);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment, newFragment);
-        transaction.addToBackStack(null);
-
-        // Commit the transaction
-        transaction.commit();
+        Intent movieDetailIntent = new Intent(this, MovieDetailsActivity.class);
+        movieDetailIntent.putExtra(MovieDetailsActivity.EXTRA_MOVIE, movie);
+        startActivity(movieDetailIntent);
     }
 }
