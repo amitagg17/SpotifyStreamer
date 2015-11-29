@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,10 +18,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -50,13 +47,15 @@ public class MainActivityFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        String url = null;
         if (id == R.id.action_sort_by_popularity) {
-            FetchPopularMovieAsyncTask fetchPopularMovieAsyncTask = new FetchPopularMovieAsyncTask(this);
-            fetchPopularMovieAsyncTask.execute(SpotifyStreamerConstants.getPopularMovieUrl());
-            return true;
+            url = SpotifyStreamerConstants.getPopularMovieUrl();
         } else if (id == R.id.action_sort_by_ratings) {
+            url = SpotifyStreamerConstants.getHighestRatedMovieUrl();
+        }
+        if (!TextUtils.isEmpty(url)) {
             FetchPopularMovieAsyncTask fetchPopularMovieAsyncTask = new FetchPopularMovieAsyncTask(this);
-            fetchPopularMovieAsyncTask.execute(SpotifyStreamerConstants.getPopularMovieUrl());
+            fetchPopularMovieAsyncTask.execute(url);
         }
         return super.onOptionsItemSelected(item);
     }

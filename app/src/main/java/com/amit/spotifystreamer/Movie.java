@@ -2,6 +2,14 @@ package com.amit.spotifystreamer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by amitkumaragarwal on 22/11/15.
@@ -12,6 +20,8 @@ public class Movie implements Parcelable {
     private String synopsis;
     private double ratings;
     private String releaseDate;
+
+    private static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
     public Movie() {
 
@@ -50,6 +60,15 @@ public class Movie implements Parcelable {
 
     public String getReleaseDate() {
         return releaseDate;
+    }
+
+    public int getReleaseDateYear() {
+        SimpleDateFormat sdf = new SimpleDateFormat(RELEASE_DATE_FORMAT);
+        ParsePosition parsePosition = new ParsePosition(0);
+        final Calendar calendar = Calendar.getInstance();
+        Date date = sdf.parse(releaseDate, parsePosition);
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
     }
 
     public void setReleaseDate(String releaseDate) {

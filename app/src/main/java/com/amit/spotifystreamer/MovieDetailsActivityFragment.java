@@ -3,6 +3,7 @@ package com.amit.spotifystreamer;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,11 @@ import butterknife.ButterKnife;
  */
 public class MovieDetailsActivityFragment extends Fragment {
 
-    @Bind(R.id.textViewMovieTitle) TextView title;
     @Bind(R.id.release_date) TextView releaseDate;
     @Bind(R.id.ratings) TextView ratings;
     @Bind(R.id.posterImageView) ImageView poster;
     @Bind(R.id.textViewSynopsis) TextView synopsis;
+    @Bind(R.id.duration) TextView duration;
 
     public MovieDetailsActivityFragment() {
     }
@@ -39,12 +40,18 @@ public class MovieDetailsActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_details, container, false);
         ButterKnife.bind(this, view);
         Movie movie = getActivity().getIntent().getParcelableExtra(MovieDetailsActivity.EXTRA_MOVIE);
-        title.setText(movie.getOriginalTitle());
-        releaseDate.setText(movie.getReleaseDate());
-        ratings.setText("" + movie.getRatings() + "/10");
-        String posterUrl = SpotifyStreamerConstants.getMoviePosterDefaultSizeUrl(movie.getPoster());
+        try {
+            releaseDate.setText("" + movie.getReleaseDateYear());
+        }
+        catch (Exception e) {
+            releaseDate.setVisibility(View.GONE);
+        }
+        ratings.setText("" + movie.getRatings() + "/10.0");
+        String posterUrl = SpotifyStreamerConstants.getMoviePosterUrl(movie.getPoster(), SpotifyStreamerConstants.MoviePosterSize.W342);
         Picasso.with(getActivity()).load(posterUrl).into(poster);
-        synopsis.setText(movie.getSynopsis());
+        if (!TextUtils.isEmpty(movie.getSynopsis())) {
+            synopsis.setText(movie.getSynopsis());
+        }
         return view;
     }
 }
