@@ -1,10 +1,12 @@
 package com.amit.spotifystreamer;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,29 +25,30 @@ public class MovieJsonParser {
     public static List<Movie> parseMovie(String jsonStr) {
 
         ArrayList<Movie> movies = new ArrayList<>();
-        try {
-            JSONObject responseJson = new JSONObject(jsonStr);
-            JSONArray resultList = responseJson.getJSONArray("results");
-            for (int index = 0; index < resultList.length(); index++) {
-                JSONObject movieJson = resultList.getJSONObject(index);
-                String posterUrl = movieJson.getString("poster_path");
-                String title = movieJson.getString("original_title");
-                String synopsis = movieJson.getString("overview");
-                double ratings = movieJson.getDouble("vote_average");
-                String releaseDate = movieJson.getString("release_date");
+        if (!TextUtils.isEmpty(jsonStr)) {
+            try {
+                JSONObject responseJson = new JSONObject(jsonStr);
+                JSONArray resultList = responseJson.getJSONArray("results");
+                for (int index = 0; index < resultList.length(); index++) {
+                    JSONObject movieJson = resultList.getJSONObject(index);
+                    String posterUrl = movieJson.getString("poster_path");
+                    String title = movieJson.getString("original_title");
+                    String synopsis = movieJson.getString("overview");
+                    double ratings = movieJson.getDouble("vote_average");
+                    String releaseDate = movieJson.getString("release_date");
 
-                Movie movie = new Movie();
-                movie.setPoster(posterUrl);
-                movie.setOriginalTitle(title);
-                movie.setRatings(ratings);
-                movie.setReleaseDate(releaseDate);
-                movie.setSynopsis(synopsis);
-                movies.add(movie);
+                    Movie movie = new Movie();
+                    movie.setPoster(posterUrl);
+                    movie.setOriginalTitle(title);
+                    movie.setRatings(ratings);
+                    movie.setReleaseDate(releaseDate);
+                    movie.setSynopsis(synopsis);
+                    movies.add(movie);
+                }
+
+            } catch (JSONException e) {
+
             }
-
-        }
-        catch (JSONException e) {
-
         }
 
         return movies;
