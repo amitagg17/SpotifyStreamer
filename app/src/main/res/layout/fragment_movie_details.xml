@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -7,62 +7,68 @@
     android:orientation="vertical"
     tools:showIn="@layout/activity_movie_details"
     tools:context="com.amit.spotifystreamer.MovieDetailsActivityFragment">
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="2dp"
-        android:weightSum="1.0">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:id="@+id/posterImageView"
-            />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="0.6"
-            android:layout_marginLeft="40dp">
-            <TextView
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:weightSum="1.0">
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/release_date"
-                style="@style/TextTitleStyle"
-                android:text="2015"/>
-            <TextView
+                android:layout_weight="0.4"
+                android:id="@+id/posterImageView"
+                />
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/duration"
-                style="@style/TextTitleStyle"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:text="120 min"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@android:color/black"
-                android:id="@+id/ratings"
-                android:text="8.1/10"/>
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:background="@android:color/holo_green_light"
-                android:textSize="10sp"
-                android:text="Mark As\nFavorite"/>
+                android:orientation="vertical"
+                android:layout_weight="0.6"
+                android:layout_marginLeft="40dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/release_date"
+                    style="@style/TextTitleStyle"
+                    android:text="2015"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/duration"
+                    style="@style/TextTitleStyle"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:text="120 min"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black"
+                    android:id="@+id/ratings"
+                    android:text="8.1/10"/>
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="@android:color/holo_green_light"
+                    android:textSize="10sp"
+                    android:text="Mark As\nFavorite"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/textViewSynopsis"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textViewSynopsis"/>
-</LinearLayout>
+</ScrollView>
