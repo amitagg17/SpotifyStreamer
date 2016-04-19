@@ -6,5 +6,7 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_sort_by_ratings" android:title="@string/action_sort_by_ratings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_sort_by_favorites" android:title="@string/action_sort_by_favorites"
+        android:orderInCategory="100" app:showAsAction="never" />
 
 </menu>

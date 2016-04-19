@@ -15,6 +15,7 @@ import java.util.Date;
  * Created by amitkumaragarwal on 22/11/15.
  */
 public class Movie implements Parcelable {
+    private String id;
     private String poster;
     private String originalTitle;
     private String synopsis;
@@ -26,6 +27,15 @@ public class Movie implements Parcelable {
     public Movie() {
 
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     public void setPoster(String poster) {
         this.poster = poster;
     }
@@ -82,6 +92,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(poster);
         dest.writeString(originalTitle);
         dest.writeString(synopsis);
@@ -101,6 +112,7 @@ public class Movie implements Parcelable {
     };
 
     private Movie(Parcel in) {
+        id = in.readString();
         poster = in.readString();
         originalTitle = in.readString();
         synopsis = in.readString();

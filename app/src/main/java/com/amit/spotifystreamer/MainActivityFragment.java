@@ -52,10 +52,14 @@ public class MainActivityFragment extends Fragment {
             url = SpotifyStreamerConstants.getPopularMovieUrl();
         } else if (id == R.id.action_sort_by_ratings) {
             url = SpotifyStreamerConstants.getHighestRatedMovieUrl();
+        } else if (id == R.id.action_sort_by_favorites) {
+
         }
         if (!TextUtils.isEmpty(url)) {
             FetchPopularMovieAsyncTask fetchPopularMovieAsyncTask = new FetchPopularMovieAsyncTask(this);
             fetchPopularMovieAsyncTask.execute(url);
+        } else {
+            // populate
         }
         return super.onOptionsItemSelected(item);
     }

@@ -42,6 +42,10 @@ public class SpotifyStreamerConstants {
     private static final String MOVIE_API_HIGHEST_RATER_FILER = "vote_average.desc";
     private static final String MOVIE_API_KEY = "api_key";
 
+    private static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
+    private static final String MOVIE_TRAILOR_VIDEOS = "videos";
+    private static final String MOVIE_REVIEWS = "reviews";
+
     public static String getMoviePosterDownloadBaseUrl() {
         return MOVIE_POSTER_DOWNLOAD_BASE_URL;
     }
@@ -82,6 +86,24 @@ public class SpotifyStreamerConstants {
 
     private static String getMovieWidthString(MoviePosterSize posterSize) {
         return moviePosterSizeMap.get(posterSize);
+    }
+
+    public static String getMovieTrailerVideos(String movieId) {
+        Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                .appendPath(movieId)
+                .appendPath(MOVIE_TRAILOR_VIDEOS)
+                .appendQueryParameter(MOVIE_API_KEY, API_KEY)
+                .build();
+        return builtUri.toString();
+    }
+
+    public static String getMovieReview(String movieId) {
+        Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                .appendPath(movieId)
+                .appendPath(MOVIE_REVIEWS)
+                .appendQueryParameter(MOVIE_API_KEY, API_KEY)
+                .build();
+        return builtUri.toString();
     }
 
 }
